@@ -1,0 +1,5 @@
+this is the file containing some lines for test purposes
+here is the start of the second line
+this is the third line
+and here you can see the fourth line
+for the first time the fifth line is the last line. My file doesn't end with nl
