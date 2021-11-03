@@ -1,3 +1,4 @@
 test*
 *.swp
 /CMakeLists.txt
+/gnlTester/
