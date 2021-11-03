@@ -1,54 +1,96 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: stycho <stycho@student.21-school.ru>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 21:43:06 by stycho            #+#    #+#             */
-/*   Updated: 2021/10/18 21:43:08 by stycho           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
-#include <stdio.h>
 
-
-size_t	ft_strlen_n(char *str)
+int	ft_is_nl_here(char *str)
 {
-	size_t	len;
+	int i;
 
-	len = 0;
-	while (*str && *str != '\n')
+	i = 0;
+	while (str[i])
 	{
-		len++;
-		str++;
+		if (str[i] == '\n')
+			return (1);
+		i++;
 	}
-	return (len);
+	return (0);
 }
 
-void	ft_strcpy_n(char *dst, char *src)
+size_t	ft_strlen(const char *s)
 {
-	while (*src && *src != '\n')
-	{
-		*dst = *src;
-		dst++;
-		src++;
-	}
-	*dst = '\0';
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
-char	*ft_return_line(char *pos_in_buf)
+char	*ft_strjoin(char *str1, char *str2)
 {
-	char	*p_to_line;
-	size_t	line_len;
+	size_t	len_s1;
+	size_t	len_s2;
+	char	*res;
+	char	*res_start;
 
-	line_len = ft_strlen_n(pos_in_buf);
-	p_to_line = (char *)malloc((line_len + 1) * sizeof(char));
-	if (!p_to_line)
+	len_s1 = 0;
+	if (str1 != NULL)
+		len_s1 = ft_strlen(str1);
+	len_s2 = ft_strlen(str2);
+	res = (char *)malloc((len_s1 + len_s2 + 1) * sizeof(char));
+	if (!res)
+		return(NULL);
+	res_start = res;
+	while (len_s1--)
+		*res++ = *str1++;
+	while (len_s2--)
+		*res++ = *str2++;
+	*res = '\0';
+	return (res_start);
+}
+
+char	*ft_upd_buf(char *buf, int fd, size_t buf_size)
+{
+	ssize_t ret;
+	char temp_buf[buf_size + 1];
+	char *dummy_pointer;
+
+	ret = 1;
+	while (!ft_is_nl_here(buf) && ret > 0)
+	{
+		ret = read(fd, temp_buf, buf_size);
+		if (ret <= 0)
+			break ;
+		temp_buf[ret] = '\0';
+		dummy_pointer = ft_strjoin(buf, temp_buf);
+		free(buf);
+		buf = dummy_pointer;
+	}
+	return (buf);
+}
+
+char	*ft_bite_line(char * *str)
+{
+	char	*remainder;
+	char	*line;
+	int		line_len;
+	int		i;
+
+	line_len = 0;
+	while (*str[line_len] != '\n')
+		line_len++;
+	line = (char *) malloc(line_len + 2);
+	if (!line)
 		return (NULL);
-	ft_strcpy_n(p_to_line, pos_in_buf);
-//	last_id = pos_in_buf + line_len;
-//	printf("i'm inside ft_return_line: %s\n", p_to_line);
-	return (p_to_line);
+	remainder = (char *) malloc(ft_strlen(*str) - line_len);
+	if (!remainder)
+		return NULL;
+	i = -1;
+	while (++i <= line_len)
+		line[i] = *str[i];
+	i = 0;
+	while (*str[++line_len] != '\0')
+		remainder[i++] = *str[line_len];
+	remainder[i] = '\0';
+	free(*str);
+	*str = remainder;
+	return (line);
 }

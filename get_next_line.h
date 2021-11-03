@@ -5,9 +5,10 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-
 char	*get_next_line(int fd);
-size_t	ft_strlen_n(char *str);
-char	*ft_return_line(char *pos_in_buf);
-
+char	*ft_upd_buf(char *buf, int fd, size_t buf_size);
+char	*ft_bite_line(char * *str);
+int		ft_is_nl_here(char *str);
+char	*ft_strjoin(char *str1, char *str2);
+size_t	ft_strlen(const char *s);
 #endif

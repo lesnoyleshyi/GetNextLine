@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include "get_next_line.h"
 
@@ -14,7 +13,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		fd = open("./testfile3", O_RDONLY);
+		fd = open("./testfile.txt", O_RDONLY);
 		if (fd == -1)
 			return (1);
 	}
