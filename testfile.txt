@@ -1,7 +1,0 @@
-1. this is the file.
-2. it contains some lines for test purposes.
-3. here is the start of the second line.
-4. this is the third line.
-5. and here you can see the fourth line.
-6. for the first time the fifth line is the last line.
-7. My file doesn't end with nl.

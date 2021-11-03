@@ -5,6 +5,8 @@ int	ft_is_nl_here(char *str)
 	int i;
 
 	i = 0;
+	if (str == NULL)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == '\n')
@@ -75,7 +77,7 @@ char	*ft_bite_line(char * *str)
 	int		i;
 
 	line_len = 0;
-	while (*str[line_len] != '\n')
+	while (*str && (*str)[line_len] != '\n')
 		line_len++;
 	line = (char *) malloc(line_len + 2);
 	if (!line)
@@ -85,10 +87,11 @@ char	*ft_bite_line(char * *str)
 		return NULL;
 	i = -1;
 	while (++i <= line_len)
-		line[i] = *str[i];
+		line[i] = (*str)[i];
+	line[i] = '\0';
 	i = 0;
-	while (*str[++line_len] != '\0')
-		remainder[i++] = *str[line_len];
+	while ((*str)[++line_len] != '\0')
+		remainder[i++] = (*str)[line_len];
 	remainder[i] = '\0';
 	free(*str);
 	*str = remainder;
