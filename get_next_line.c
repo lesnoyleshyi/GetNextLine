@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-//#define BUFFER_SIZE 90
+//#define BUFFER_SIZE 10000000
 
 char	*get_next_line(int fd)
 {

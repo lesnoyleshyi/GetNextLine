@@ -15,7 +15,10 @@ int	main(int argc, char **argv)
 	{
 		fd = open("./testfile3.txt", O_RDONLY);
 		if (fd == -1)
+		{
+			printf("File hasn't been read\n");
 			return (1);
+		}
 	}
 	line = get_next_line(fd);
 	printf("string:%s", line);
