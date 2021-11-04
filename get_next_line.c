@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-//#define BUFFER_SIZE 1
+//#define BUFFER_SIZE 90
 
 char	*get_next_line(int fd)
 {
@@ -11,6 +11,7 @@ char	*get_next_line(int fd)
 	remainder = ft_upd_buf(remainder, fd, BUFFER_SIZE);
 	if (!remainder)
 		return (NULL);
-	line = ft_bite_line(&remainder);
+	line = ft_get_line(remainder);
+	remainder = ft_remove_line(remainder);
 	return (line);
 }
