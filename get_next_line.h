@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stycho <stycho@student.21-school.ru>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/04 23:43:29 by stycho            #+#    #+#             */
+/*   Updated: 2021/11/04 23:43:33 by stycho           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # include <sys/types.h>
@@ -5,8 +17,14 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 0
+# elif BUFFER_SIZE < 0
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE 0
+# endif
 char	*get_next_line(int fd);
-char	*ft_upd_buf(char *buf, int fd, size_t buf_size);
+char	*ft_upd_buf(char *buf, int fd);
 char	*ft_get_line(char *str);
 char	*ft_remove_line(char *str);
 int		ft_is_nl_here(char *str);
