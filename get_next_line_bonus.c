@@ -14,16 +14,16 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*remainder[1024];
+	static char	*remainder;
 	char		*line;
 
 	if (BUFFER_SIZE < 1 || fd < 0)
 		return (NULL);
-	remainder[fd] = ft_upd_buf(remainder[fd], fd);
-	if (!remainder[fd])
+	remainder = ft_upd_buf(remainder, fd);
+	if (!remainder)
 		return (NULL);
-	line = ft_get_line(remainder[fd]);
-	remainder[fd] = ft_remove_line(remainder[fd]);
+	line = ft_get_line(remainder);
+	remainder = ft_remove_line(remainder);
 	return (line);
 }
 
