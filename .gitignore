@@ -3,3 +3,6 @@ test*
 /CMakeLists.txt
 /gnlTester/
 /gnlWarMachine/
+/testfiles/
+/a.out
+/bonus_gnl
