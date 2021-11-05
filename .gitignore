@@ -1,5 +1,6 @@
-test*
 *.swp
 /CMakeLists.txt
 /gnlTester/
 /gnlWarMachine/
+/a.out
+/bonus_gnl
